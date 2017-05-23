@@ -5,8 +5,7 @@ const PROGRAM_OPTIONS = {
     list : {
       argument : 'l',
       description : 'Listar eventos existentes no arquivo',
-      command : 'funcao',
-      call : 'import name'
+      command : 'funcao'
     }
 }
 
@@ -32,6 +31,9 @@ program.parse(process.argv);
 for (var option in PROGRAM_OPTIONS){
   if (PROGRAM_OPTIONS.hasOwnProperty(option) && program[option]) {
       var command = PROGRAM_OPTIONS[option];
-      console.log(`o ${option} => ${command.description} deve chamar a funcao no import ${command.call}`);
+      console.log(`o ${option} => ${command.description} deve chamar a funcao no import`);
+      console.log(`requeriu o => ./cli/${option}.js`)
+      var func =  require(`./cli/options/${option}.js`);
+      func.execute();
   }
 }
