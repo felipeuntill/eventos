@@ -74,6 +74,7 @@
   },
   "dependencies": {
     "@fdaciuk/ajax": "^2.1.2",
+    "commander": "^2.9.0",
     "preact": "^6.2.1",
     "preact-compat": "^3.6.0",
     "react": "^15.3.2",
