@@ -5,7 +5,8 @@ const PROGRAM_OPTIONS = {
     list : {
       argument : 'l',
       description : 'Listar eventos existentes no arquivo',
-      command : 'funcao'
+      command : 'funcao',
+      call : 'import name'
     }
 }
 
@@ -29,26 +30,8 @@ program.parse(process.argv);
 
 // detectando os parametros que foram inputados
 for (var option in PROGRAM_OPTIONS){
-  if (PROGRAM_OPTIONS.hasOwnProperty(option)) {
-    if(program[option]){
-      console.log(`o ${option} => ${PROGRAM_OPTIONS[option].description}`);
-    }
+  if (PROGRAM_OPTIONS.hasOwnProperty(option) && program[option]) {
+      var command = PROGRAM_OPTIONS[option];
+      console.log(`o ${option} => ${command.description} deve chamar a funcao no import ${command.call}`);
   }
 }
-
-
-
-
-
-
-//   .option('-p, --peppers', 'Add peppers')
-//   .option('-P, --pineapple', 'Add pineapple')
-//   .option('-b, --bbq-sauce', 'Add bbq sauce')
-//   .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
-//   .parse(process.argv);
-//
-// console.log('you ordered a pizza with:');
-// if (program.peppers) console.log('  - peppers');
-// if (program.pineapple) console.log('  - pineapple');
-// if (program.bbqSauce) console.log('  - bbq');
-// console.log('  - %s cheese', program.cheese);
