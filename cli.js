@@ -7,5 +7,5 @@ const uploader = require('./cli/foundation/uploader.js');
 // The magic happens here.
 runtime.dispatch(program);
 
-
-uploader.store('data/events.json');
+// prove of concecpt upload
+//uploader.store('data/events.json');
