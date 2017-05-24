@@ -5,6 +5,11 @@
       "argument" : "l",
       "description" : "Listar eventos existentes no arquivo",
       "method" : "execute"
+    },
+    "create" : {
+      "argument" : "c",
+      "description" : "criar novos eventos",
+      "method" : "execute"
     }
   }
 }

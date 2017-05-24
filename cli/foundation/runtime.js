@@ -23,6 +23,7 @@ class runtime {
 
   static executeOptions(program){
     this.iterateOptions((option, command)=> {
+      if(!program[option]) return;
       var func =  require(`../commands/${option}.js`);
       func[command.method]();
     });
