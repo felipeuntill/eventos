@@ -4,6 +4,10 @@ const request  = require('request');
 const btoa  = require('btoa');
 const atob  = require('atob');
 
+const newlineRegex = /\n/g;
+
+let githubFile = null;
+
 var questions = [
   {
     type: 'input',
@@ -33,9 +37,8 @@ var questions = [
 
 class uploader {
 
-  static store(){
+  static store(destination, content){
     inquirer.prompt(questions).then(function (answers) {
-      console.log('\nDados do github:');
 
       var credentials = answers;
 
@@ -44,12 +47,8 @@ class uploader {
       credentials.encodeInBase64  = b64EncodeUnicode;
       credentials.decodeFromBase64= b64DecodeUnicode;
 
-      const githubFile = GitHubFile(credentials);
-
-      console.log(JSON.stringify(credentials, null, '  '));
-
-      githubFile.get('data/events.json', updateEmojiFile);
-
+      githubFile = GitHubFile(credentials);
+      githubFile.get(destination, updateEmojiFile);
 
     });
   }
@@ -62,7 +61,7 @@ function updateEmojiFile(error, file) {
   }
   else {
     console.log('File before updating', file.content);
-    //githubFile.update({filePath: 'data/events2.json', content: file.content + '😎'}, logResult);
+    githubFile.update({filePath: 'data/events2.json', content: file.content + '😎'}, logResult);
   }
 }
 
@@ -76,7 +75,7 @@ function logResult(error, content) {
 }
 
 
-var newlineRegex = /\n/g;
+
 
 function b64EncodeUnicode(str) {
   return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
