@@ -10,6 +10,11 @@
       "argument" : "c",
       "description" : "criar novos eventos",
       "method" : "execute"
+    },
+    "sync" : {
+      "argument" : "s",
+      "description" : "sincronizar mudanças com o banco de produção",
+      "method" : "execute"
     }
   }
 }
