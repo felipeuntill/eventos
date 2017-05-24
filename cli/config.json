@@ -3,18 +3,15 @@
   "options" : {
     "list" : {
       "argument" : "l",
-      "description" : "Listar eventos existentes no arquivo",
-      "method" : "execute"
+      "description" : "Listar eventos existentes no arquivo"
     },
     "create" : {
       "argument" : "c",
-      "description" : "criar novos eventos",
-      "method" : "execute"
+      "description" : "criar novos eventos"
     },
     "sync" : {
       "argument" : "s",
-      "description" : "sincronizar mudanças com o banco de produção",
-      "method" : "execute"
+      "description" : "sincronizar mudanças com o banco de produção"
     }
   }
 }
