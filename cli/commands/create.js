@@ -7,13 +7,38 @@ var questions = [
   },
   {
     type: 'input',
+    name: 'description',
+    message: 'Qual a descrição do evento?'
+  },
+  {
+    type: 'input',
     name: 'link',
-    message: 'Qual o link para o website do evento?',
-    validate: function (answer) {
-        if(ValidURL(answer)) return true;
-        return 'Você deve informar uma url válida...';
+    message: 'Qual o link para o website do evento?'//,
+    // validate: function (answer) {
+    //     if(ValidURL(answer)) return true;
+    //     return 'Você deve informar uma url válida...';
+    // }
+  },
+  {
+    type: 'confirm',
+    name: 'free',
+    message: 'O evento é gratuito?',
+    default: false,
+  },
+  {
+    type: 'input',
+    name: 'price',
+    message: 'Qual o valor do evento?',
+    when: function (answers) {
+      return !answers.free;
     }
-  }
+  },
+  {
+    type: 'list',
+    name: 'state',
+    message: 'Em qual estado o evento irá ocorrer?',
+    choices: ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
+  },
   // {
   //   type: 'confirm',
   //   name: 'toBeDelivered',
