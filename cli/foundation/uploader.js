@@ -30,6 +30,7 @@ class uploader {
   }
 
   get(path, callback) {
+    console.log(this.credentials);
     github.getFile(this.credentials, path, callback);
   }
 
