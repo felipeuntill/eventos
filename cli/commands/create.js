@@ -7,6 +7,11 @@ var questions = [
   },
   {
     type: 'input',
+    name: 'date',
+    message: 'Qual a data do evento do evento(yyyy/MM/dd)?'
+  },
+  {
+    type: 'input',
     name: 'description',
     message: 'Qual a descrição do evento?'
   },
@@ -39,6 +44,26 @@ var questions = [
     message: 'Em qual estado o evento irá ocorrer?',
     choices: ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
   },
+  {
+    type: 'input',
+    name: 'city',
+    message: 'Qual a cidade onde o evento irá ocorrer?'
+  },
+  {
+    type: 'input',
+    name: 'address',
+    message: 'Qual endereço de onde o evento irá ocorrer?'
+  },
+  {
+    type: 'input',
+    name: 'map',
+    message: 'Qual a url do mapa para o endereço?'//,
+    // validate: function (answer) {
+    //     if(ValidURL(answer)) return true;
+    //     return 'Você deve informar uma url válida...';
+    // }
+  }
+
   // {
   //   type: 'confirm',
   //   name: 'toBeDelivered',
