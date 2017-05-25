@@ -62,7 +62,21 @@ var questions = [
     //     if(ValidURL(answer)) return true;
     //     return 'Você deve informar uma url válida...';
     // }
-  }
+  },
+  {
+    type: 'confirm',
+    name: 'hasLogo',
+    message: 'O evento possui um logotipo?',
+    default: true,
+  },
+  {
+    type: 'input',
+    name: 'price',
+    message: 'Qual o link para o logotipo do evento do evento?',
+    when: function (answers) {
+      return !answers.hasLogo;
+    }
+  },
 
   // {
   //   type: 'confirm',
