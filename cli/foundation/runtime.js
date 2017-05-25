@@ -38,8 +38,6 @@ class runtime {
 
   }
 
-
-
   static displayOptions (program){
 
     var choices = [];
