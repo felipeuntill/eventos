@@ -15,29 +15,30 @@ const questions = [
 
 class uploader {
 
-  constructor () {
-    this.authorize();
-  }
-
-  authorize() {
+  authorize(callback) {
     inquirer.prompt(questions).then(function (answers) {
-      this.credentials = answers;
-      this.credentials.request = request;
-      this.credentials.shouldSetUserAgent = true;
-      this.credentials.encodeInBase64  = base64.encode;
-      this.credentials.decodeFromBase64= base64.decode;
+      let credentials = answers;
+      credentials.request = request;
+      credentials.shouldSetUserAgent = true;
+      credentials.encodeInBase64  = base64.encode;
+      credentials.decodeFromBase64= base64.decode;
+      callback(credentials);
     });
   }
 
   get(path, callback) {
-    console.log(this.credentials);
-    github.getFile(this.credentials, path, callback);
+    this.authorize((credentials) => {
+      console.log('iniciando o get', path);
+      github.getFile(credentials, path, callback);
+    });
   }
 
   update(path, content, callback){
-    github.updateFile(this.credentials, path, content, callback);
+    this.authorize((credentials) => {
+        console.log(credentials);
+        github.updateFile(credentials, path, content, callback);
+    });
   }
-
 }
 
 

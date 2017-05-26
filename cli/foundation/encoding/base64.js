@@ -12,14 +12,15 @@ class base64 {
     var b64Decoded = atob(str.replace(newlineRegex, ''));
     var decodedWithUnicodeHexesRestored = Array.prototype.map.call(
       b64Decoded,
-      this.hexEncodeCharCode
+      hexEncodeCharCode
     )
     .join('');
     return decodeURIComponent(decodedWithUnicodeHexesRestored);
   }
-  static hexEncodeCharCode(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }
+}
+
+function hexEncodeCharCode(c) {
+  return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 }
 
 module.exports = base64;
