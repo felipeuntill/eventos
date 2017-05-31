@@ -1,3 +1,4 @@
+const eventos = require('../../src/data/events.json');
 const uploader = require('../foundation/uploader.js');
 const eventPrinter = require('../printer/eventPrinter.js');
 
@@ -8,15 +9,12 @@ class sync {
 
       const helper = new uploader();
 
-      helper.get('data/events.json', (file) => {
+      helper.write('data/events.json', JSON.stringify(eventos), (file) => {
 
-        const events = JSON.parse(file.content);
-
-        events.forEach((event) => {
-          eventPrinter.print(event);
-        })
+        console.log(file);
 
       });
+
    }
  }
 

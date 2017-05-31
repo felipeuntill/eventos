@@ -79,6 +79,7 @@
   },
   "dependencies": {
     "@fdaciuk/ajax": "^2.1.2",
+    "app-root-path": "^2.0.1",
     "commander": "^2.9.0",
     "preact": "^6.2.1",
     "preact-compat": "^3.6.0",

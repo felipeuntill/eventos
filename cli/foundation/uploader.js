@@ -32,9 +32,8 @@ class uploader {
     });
   }
 
-  update(path, content, callback){
+  write(path, content, callback){
     this.authorize((credentials) => {
-        console.log(credentials);
         github.updateFile(credentials, path, content, callback);
     });
   }

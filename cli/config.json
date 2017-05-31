@@ -12,6 +12,10 @@
     "sync" : {
       "argument" : "s",
       "description" : "sincronizar mudanças com o banco de produção"
+    },
+    "manage" : {
+      "argument" : "m",
+      "description" : "Tenta simular um @theandersonn"
     }
   }
 }
