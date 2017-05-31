@@ -11,7 +11,7 @@ class sync {
 
       helper.write('data/events.json', JSON.stringify(eventos), (file) => {
 
-        console.log(file);
+        console.log('Ambiente de Produção atualizado com sucesso');
 
       });
 

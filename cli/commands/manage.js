@@ -2,6 +2,7 @@ const eventPrinter = require('../printer/eventPrinter.js');
 const eventHelper = require('../helper/eventHelper.js');
 const fileManager = require('../foundation/fileManager.js')
 const appRoot = require('app-root-path');
+const beautify = require('js-beautify').js_beautify;
 
 class manage {
    static execute(){
@@ -26,7 +27,7 @@ class manage {
    }
 
    static updateFile (events) {
-     fileManager.write(appRoot.path+ '/src/data/events.json', JSON.stringify(events), this.displayResult);
+     fileManager.write(appRoot.path+ '/src/data/events.json', beautify(JSON.stringify(events)), this.displayResult);
    }
 
    static displayResult (source) {
