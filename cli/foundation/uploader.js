@@ -28,7 +28,6 @@ class uploader {
 
   get(path, callback) {
     this.authorize((credentials) => {
-      console.log('iniciando o get', path);
       github.getFile(credentials, path, callback);
     });
   }
