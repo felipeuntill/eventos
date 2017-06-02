@@ -1,5 +1,10 @@
-var inquirer = require('inquirer');
-var questions = [
+const inquirer = require('inquirer');
+const fileManager = require('../foundation/fileManager');
+const appRoot = require('app-root-path');
+const beautify = require('js-beautify').js_beautify;
+const eventPrinter = require('../printer/eventPrinter.js');
+
+const questions = [
   {
     type: 'input',
     name: 'title',
@@ -8,7 +13,7 @@ var questions = [
   {
     type: 'input',
     name: 'date',
-    message: 'Qual a data do evento do evento(yyyy/MM/dd)?'
+    message: 'Qual a data do evento do evento(dd/MM/yyyy)?'
   },
   {
     type: 'input',
@@ -28,21 +33,27 @@ var questions = [
     type: 'confirm',
     name: 'free',
     message: 'O evento é gratuito?',
-    default: false,
+    default: true,
   },
   {
     type: 'input',
     name: 'price',
-    message: 'Qual o valor do evento?',
+    message: 'Qual o valor do evento? (R$ 00,00)',
     when: function (answers) {
       return !answers.free;
     }
   },
   {
-    type: 'list',
+    type: 'input',
+    name: 'image',
+    message: 'Qual o link para o logotipo do evento do evento?'
+  },
+  {
+    type: 'input',
     name: 'state',
     message: 'Em qual estado o evento irá ocorrer?',
-    choices: ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
+    // Selecionar é mais lento que escrever :(
+    //choices: ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
   },
   {
     type: 'input',
@@ -62,28 +73,59 @@ var questions = [
     //     if(ValidURL(answer)) return true;
     //     return 'Você deve informar uma url válida...';
     // }
-  },
-  {
-    type: 'confirm',
-    name: 'hasLogo',
-    message: 'O evento possui um logotipo?',
-    default: true,
-  },
-  {
-    type: 'input',
-    name: 'price',
-    message: 'Qual o link para o logotipo do evento do evento?',
-    when: function (answers) {
-      return !answers.hasLogo;
-    }
   }
 ];
 
 class create {
   static execute () {
+
     inquirer.prompt(questions).then(function (answers) {
-      console.log('\nDados do evento:');
-      console.log(JSON.stringify(answers, null, '  '));
+
+      // console.log('\nDados do evento:');
+
+      const splitedDate = answers.date.split('/');
+      const event = {
+          "title": answers.title,
+          "date": {
+              "day": splitedDate[0],
+              "month": splitedDate[1],
+              "year": splitedDate[2]
+          },
+          "innerLink": "inner.html",
+          "link": answers.link,
+          "price": answers.free ? "Free" : answers.price,
+          "location": {
+               "city": answers.city,
+               "state": answers.state,
+               "address": answers.address,
+               "locationUrl": answers.map
+          },
+          "image": answers.image,
+          "shortDescription": answers.description
+      }
+      // console.log(JSON.stringify(answers, null, '  '));
+      // console.log(JSON.stringify(event, null, '  '));
+
+      this.writeFile(event);
+
+    });
+  }
+  static writeFile (event) {
+    let events = require('../../src/data/events.json');
+    events.push(event);
+
+    console.log(events);
+
+    fileManager.write(appRoot.path+ '/src/data/events.json', beautify(JSON.stringify(events, null, '  ')), this.displayResult);
+
+  }
+
+  static displayResult (source) {
+
+    let events = require('../../src/data/events.json');
+
+    events.forEach((event) => {
+      eventPrinter.print(event);
     });
   }
 }
