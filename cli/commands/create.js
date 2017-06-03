@@ -81,10 +81,21 @@ class create {
 
     inquirer.prompt(questions).then(function (answers) {
 
+      return create.writeFile({ title: '1° Hangout Frontend RJ',
+    date: { day: '07', month: '05', year: '2017' },
+    innerLink: 'inner.html',
+    link: 'https://www.meetup.com/pt-BR/frontendrj/events/240096866/',
+    price: 'Free',
+    location:
+     { city: 'São Paulo',
+       state: 'Sp',
+       address: 'Online',
+       locationUrl: 'https://www.youtube.com/watch?v=313XwXcYpKk' }});
+
       // console.log('\nDados do evento:');
 
-      const splitedDate = answers.date.split('/');
-      const event = {
+      let splitedDate = answers.date.split('/');
+      let event = {
           "title": answers.title,
           "date": {
               "day": splitedDate[0],
@@ -106,17 +117,14 @@ class create {
       // console.log(JSON.stringify(answers, null, '  '));
       // console.log(JSON.stringify(event, null, '  '));
 
-      this.writeFile(event);
+      create.writeFile(event);
 
     });
   }
   static writeFile (event) {
     let events = require('../../src/data/events.json');
     events.push(event);
-
-    console.log(events);
-
-    fileManager.write(appRoot.path+ '/src/data/events.json', beautify(JSON.stringify(events, null, '  ')), this.displayResult);
+    fileManager.write(appRoot.path+ '/src/data/events.json', beautify(JSON.stringify(events)), this.displayResult);
 
   }
 
@@ -135,4 +143,4 @@ function ValidURL(str) {
     return urlregex.test(str);
 }
 
- module.exports = create;
+module.exports = create;
